@@ -57,7 +57,7 @@
 <body>
   <h2>Formulário de Envio de Ebook</h2>
 
-  <form action="https://n8n.spagi.cloud/webhook/ed55d412-364c-4aa4-a756-6e4dc98eedd8" method="post">
+  <form id="formEbook" action="https://n8n.spagi.cloud/webhook/ed55d412-364c-4aa4-a756-6e4dc98eedd8" method="post">
     <label for="nome">Nome:</label>
     <input type="text" id="nome" name="nome" required>
 
@@ -67,8 +67,34 @@
     <label for="telefone">Telefone:</label>
     <input type="tel" id="telefone" name="telefone" required>
 
-    <input type="submit" value="Enviar">
+    <button type="submit">Enviar</button>
   </form>
+
+  <script>
+    document.getElementById('formEbook').addEventListener('submit', function(event) {
+      event.preventDefault(); // Impede o envio padrão do formulário
+
+      var form = event.target;
+      var url = form.action;
+      var method = form.method.toUpperCase();
+      var formData = new FormData(form);
+
+      fetch(url, {
+        method: method,
+        body: formData
+      })
+      .then(function(response) {
+        // Trate a resposta da requisição aqui
+        windows.alert('Requisição enviada com sucesso!', response);
+        // Redirecionar ou exibir mensagem de sucesso, por exemplo
+		window.location.href = 'https://www.amaisinformatica.com.br'
+      })
+      .catch(function(error) {
+        // Trate os erros aqui
+        console.error('Ocorreu um erro ao enviar a requisição:', error);
+      });
+    });
+  </script>
 
 </body>
 </html>
